@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tanisha Khete — Education</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0e0e0e;
+      --white: #f5f2ed;
+      --cream: #ede8e0;
+      --accent: #c8a96e;
+      --accent2: #7b9e87;
+      --red: #c94040;
+      --text: #1a1a1a;
+      --muted: #6b6560;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--white);
+      color: var(--text);
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* Custom cursor */
+    .cursor {
+      width: 12px; height: 12px;
+      background: var(--black);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      transition: transform 0.15s ease, background 0.2s;
+    }
+    .cursor-ring {
+      width: 36px; height: 36px;
+      border: 1.5px solid var(--black);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9998;
+      transition: transform 0.35s cubic-bezier(0.23,1,0.32,1), width 0.3s, height 0.3s, border-color 0.2s;
+    }
+    body:hover .cursor { opacity: 1; }
+
+    /* NOISE OVERLAY */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 100; opacity: 0.5;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.2rem 4rem;
+      background: rgba(245,242,237,0.88);
+      backdrop-filter: blur(12px);
+      z-index: 500;
+      border-bottom: 1px solid rgba(0,0,0,0.07);
+    }
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem; letter-spacing: 0.1em;
+      color: var(--black);
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2.4rem; list-style: none; }
+    .nav-links a {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem; letter-spacing: 0.08em;
+      text-transform: uppercase; text-decoration: none;
+      color: var(--muted);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--black); }
+
+    /* PAGE HEADER */
+    .page-header {
+      padding: 10rem 5rem 3rem;
+      background: var(--cream);
+      position: relative;
+      overflow: hidden;
+    }
+    .page-header::before {
+      content: 'EDU';
+      position: absolute; right: -1rem; top: 50%;
+      transform: translateY(-50%) rotate(90deg);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 10rem; color: rgba(0,0,0,0.03);
+      user-select: none; white-space: nowrap;
+    }
+    .section-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    .section-heading {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      line-height: 0.92;
+      color: var(--black);
+      margin-bottom: 0;
+    }
+
+    /* EDUCATION SECTION */
+    .education { padding: 5rem; }
+    .edu-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .edu-card {
+      border: 1.5px solid rgba(0,0,0,0.12);
+      padding: 2.5rem;
+      position: relative;
+      transition: border-color 0.25s, transform 0.3s;
+      overflow: hidden;
+      background: var(--white);
+    }
+    .edu-card:hover { border-color: var(--black); transform: translateY(-4px); }
+    .edu-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0;
+      width: 3px; height: 100%;
+      background: var(--accent2);
+    }
+    .edu-card-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 4.5rem; color: rgba(0,0,0,0.04);
+      position: absolute; right: 1rem; bottom: 0; line-height: 1;
+    }
+    .edu-degree {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.2rem; color: var(--black);
+      margin-bottom: 0.5rem;
+    }
+    .edu-field {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    .edu-cgpa {
+      display: inline-block;
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem; padding: 0.35rem 0.9rem;
+    }
+
+    /* HIGHLIGHTS */
+    .highlights {
+      padding: 0 5rem 5rem;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .highlight-box {
+      background: var(--black);
+      padding: 2rem;
+      text-align: center;
+      transition: transform 0.3s;
+    }
+    .highlight-box:hover { transform: translateY(-4px); }
+    .highlight-box .number {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3rem;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+    .highlight-box .label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.6);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--black);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 1.8rem 5rem;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    footer span {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem; color: rgba(255,255,255,0.25);
+      letter-spacing: 0.08em;
+    }
+
+    /* ANIMATIONS */
+    .reveal {
+      opacity: 0; transform: translateY(40px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* SCROLLBAR */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--black); }
+    ::-webkit-scrollbar-thumb { background: var(--accent); }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      nav { padding: 1rem 2rem; }
+      .nav-links { gap: 1.4rem; }
+      .page-header { padding: 8rem 2.5rem 3rem; }
+      .page-header::before { font-size: 6rem; }
+      .education { padding: 3rem 2.5rem; }
+      .edu-cards { grid-template-columns: 1fr; }
+      .highlights { grid-template-columns: 1fr; padding: 0 2.5rem 3rem; }
+      footer { flex-direction: column; gap: 0.5rem; text-align: center; padding: 1.5rem 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Custom Cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">TK</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="skills.html">Skills</a></li>
+    <li><a href="education.html" class="active">Education</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="certifications.html">Certs</a></li>
+    <li><a href="resume.html">Resume</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <p class="section-label">03 — Academic Background</p>
+  <h2 class="section-heading">EDUCATION</h2>
+</div>
+
+<!-- EDUCATION -->
+<section class="education reveal">
+  <div class="edu-cards">
+    <div class="edu-card">
+      <span class="edu-card-num">01</span>
+      <p class="edu-field">Undergraduate Degree</p>
+      <h3 class="edu-degree">B.Tech in Computer Science</h3>
+      <span class="edu-cgpa">CGPA: 8.6 (till last semester)</span>
+    </div>
+    <div class="edu-card">
+      <span class="edu-card-num">02</span>
+      <p class="edu-field">Higher Secondary</p>
+      <h3 class="edu-degree">12th — PCM</h3>
+    </div>
+  </div>
+</section>
+
+<!-- HIGHLIGHTS -->
+<div class="highlights reveal">
+  <div class="highlight-box">
+    <div class="number">8.6</div>
+    <div class="label">Current CGPA</div>
+  </div>
+  <div class="highlight-box">
+    <div class="number">CS</div>
+    <div class="label">Computer Science</div>
+  </div>
+  <div class="highlight-box">
+    <div class="number">2025</div>
+    <div class="label">Graduation Year</div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <span>© 2025 Tanisha Khete — All rights reserved.</span>
+  <span>Jaipur, Rajasthan · India</span>
+</footer>
+
+<script>
+  /* Cursor */
+  const cursor = document.getElementById('cursor');
+  const ring   = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.left = mx - 6 + 'px';
+    cursor.style.top  = my - 6 + 'px';
+  });
+
+  function animateRing() {
+    rx += (mx - rx - 18) * 0.12;
+    ry += (my - ry - 18) * 0.12;
+    ring.style.left = rx + 'px';
+    ring.style.top  = ry + 'px';
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+
+  document.querySelectorAll('a, button, .edu-card, .highlight-box').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.style.transform = 'scale(2.5)';
+      ring.style.width = '60px'; ring.style.height = '60px';
+      ring.style.borderColor = '#c8a96e';
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.style.transform = 'scale(1)';
+      ring.style.width = '36px'; ring.style.height = '36px';
+      ring.style.borderColor = '#0e0e0e';
+    });
+  });
+
+  /* Scroll reveal */
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

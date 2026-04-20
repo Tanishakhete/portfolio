@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tanisha Khete — Contact</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0e0e0e;
+      --white: #f5f2ed;
+      --cream: #ede8e0;
+      --accent: #c8a96e;
+      --accent2: #7b9e87;
+      --red: #c94040;
+      --text: #1a1a1a;
+      --muted: #6b6560;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--black);
+      color: var(--white);
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* Custom cursor */
+    .cursor {
+      width: 12px; height: 12px;
+      background: var(--white);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      transition: transform 0.15s ease, background 0.2s;
+    }
+    .cursor-ring {
+      width: 36px; height: 36px;
+      border: 1.5px solid var(--white);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9998;
+      transition: transform 0.35s cubic-bezier(0.23,1,0.32,1), width 0.3s, height 0.3s, border-color 0.2s;
+    }
+    body:hover .cursor { opacity: 1; }
+
+    /* NOISE OVERLAY */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 100; opacity: 0.5;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.2rem 4rem;
+      background: rgba(14,14,14,0.88);
+      backdrop-filter: blur(12px);
+      z-index: 500;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem; letter-spacing: 0.1em;
+      color: var(--white);
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2.4rem; list-style: none; }
+    .nav-links a {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem; letter-spacing: 0.08em;
+      text-transform: uppercase; text-decoration: none;
+      color: rgba(255,255,255,0.5);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--white); }
+
+    /* CONTACT */
+    .contact {
+      min-height: calc(100vh - 80px);
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      padding: 0;
+      margin-top: 80px;
+    }
+    .contact-left {
+      padding: 6rem 5rem;
+      position: relative; overflow: hidden;
+    }
+    .contact-left::before {
+      content: 'HELLO';
+      position: absolute; right: -2rem; top: 50%;
+      transform: translateY(-50%) rotate(-90deg);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 14rem; color: rgba(255,255,255,0.025);
+      user-select: none; white-space: nowrap;
+    }
+    .contact-big {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3.5rem, 7vw, 7rem);
+      line-height: 0.9; color: var(--white);
+      margin-bottom: 2rem;
+    }
+    .contact-big span { color: var(--accent); }
+    .contact-tagline {
+      font-family: 'DM Serif Display', serif;
+      font-style: italic;
+      color: rgba(245,242,237,0.45);
+      font-size: 1.1rem; max-width: 320px;
+      line-height: 1.6;
+    }
+    .contact-right {
+      padding: 6rem 5rem 6rem 4rem;
+      border-left: 1px solid rgba(255,255,255,0.08);
+      display: flex; flex-direction: column; justify-content: center;
+      gap: 2rem;
+    }
+    .contact-row {
+      display: flex; flex-direction: column; gap: 0.3rem;
+    }
+    .contact-row-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--accent);
+    }
+    .contact-row-val {
+      font-size: 0.95rem; color: var(--white);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    a.contact-row-val:hover { color: var(--accent); }
+
+    /* SOCIAL LINKS */
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    .social-btn {
+      padding: 0.6rem 1.2rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.2);
+      color: var(--white);
+      transition: border-color 0.25s, background 0.25s, color 0.25s;
+    }
+    .social-btn:hover {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: var(--black);
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--black);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 1.8rem 5rem;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    footer span {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem; color: rgba(255,255,255,0.25);
+      letter-spacing: 0.08em;
+    }
+
+    /* ANIMATIONS */
+    .reveal {
+      opacity: 0; transform: translateY(40px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* SCROLLBAR */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--black); }
+    ::-webkit-scrollbar-thumb { background: var(--accent); }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      nav { padding: 1rem 2rem; }
+      .nav-links { gap: 1.4rem; }
+      .contact { grid-template-columns: 1fr; }
+      .contact-right { border-left: none; border-top: 1px solid rgba(255,255,255,0.08); padding: 4rem 2.5rem; }
+      .contact-left { padding: 4rem 2.5rem; }
+      .contact-left::before { font-size: 8rem; }
+      footer { flex-direction: column; gap: 0.5rem; text-align: center; padding: 1.5rem 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Custom Cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">TK</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="skills.html">Skills</a></li>
+    <li><a href="education.html">Education</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="certifications.html">Certs</a></li>
+    <li><a href="resume.html">Resume</a></li>
+    <li><a href="contact.html" class="active">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- CONTACT -->
+<div class="contact reveal">
+  <div class="contact-left">
+    <h2 class="contact-big">LET'S<br><span>CONNECT</span></h2>
+    <p class="contact-tagline">Open to opportunities, collaborations, and conversations.</p>
+    <div class="social-links">
+      <a href="https://www.linkedin.com/in/tanisha-khete-9549b5290" target="_blank" class="social-btn">LinkedIn</a>
+      <a href="https://github.com/Tanishakhete" target="_blank" class="social-btn">GitHub</a>
+    </div>
+  </div>
+  <div class="contact-right">
+    <div class="contact-row">
+      <span class="contact-row-label">Email</span>
+      <a class="contact-row-val" href="mailto:tanishakhete849@gmail.com">tanishakhete849@gmail.com</a>
+    </div>
+    <div class="contact-row">
+      <span class="contact-row-label">Phone</span>
+      <a class="contact-row-val" href="tel:+918770561722">+91 8770561722</a>
+    </div>
+    <div class="contact-row">
+      <span class="contact-row-label">Location</span>
+      <span class="contact-row-val">Jaipur, Rajasthan</span>
+    </div>
+    <div class="contact-row">
+      <span class="contact-row-label">LinkedIn</span>
+      <a class="contact-row-val" href="https://www.linkedin.com/in/tanisha-khete-9549b5290" target="_blank">View Profile ↗</a>
+    </div>
+    <div class="contact-row">
+      <span class="contact-row-label">GitHub</span>
+      <a class="contact-row-val" href="https://github.com/Tanishakhete" target="_blank">View Repos ↗</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <span>© 2025 Tanisha Khete — All rights reserved.</span>
+  <span>Jaipur, Rajasthan · India</span>
+</footer>
+
+<script>
+  /* Cursor */
+  const cursor = document.getElementById('cursor');
+  const ring   = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.left = mx - 6 + 'px';
+    cursor.style.top  = my - 6 + 'px';
+  });
+
+  function animateRing() {
+    rx += (mx - rx - 18) * 0.12;
+    ry += (my - ry - 18) * 0.12;
+    ring.style.left = rx + 'px';
+    ring.style.top  = ry + 'px';
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+
+  document.querySelectorAll('a, button, .social-btn').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.style.transform = 'scale(2.5)';
+      ring.style.width = '60px'; ring.style.height = '60px';
+      ring.style.borderColor = '#c8a96e';
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.style.transform = 'scale(1)';
+      ring.style.width = '36px'; ring.style.height = '36px';
+      ring.style.borderColor = '#f5f2ed';
+    });
+  });
+
+  /* Scroll reveal */
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tanisha Khete — Resume</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0e0e0e;
+      --white: #f5f2ed;
+      --cream: #ede8e0;
+      --accent: #c8a96e;
+      --accent2: #7b9e87;
+      --red: #c94040;
+      --text: #1a1a1a;
+      --muted: #6b6560;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--white);
+      color: var(--text);
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* Custom cursor */
+    .cursor {
+      width: 12px; height: 12px;
+      background: var(--black);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      transition: transform 0.15s ease, background 0.2s;
+    }
+    .cursor-ring {
+      width: 36px; height: 36px;
+      border: 1.5px solid var(--black);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9998;
+      transition: transform 0.35s cubic-bezier(0.23,1,0.32,1), width 0.3s, height 0.3s, border-color 0.2s;
+    }
+    body:hover .cursor { opacity: 1; }
+
+    /* NOISE OVERLAY */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 100; opacity: 0.5;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.2rem 4rem;
+      background: rgba(245,242,237,0.88);
+      backdrop-filter: blur(12px);
+      z-index: 500;
+      border-bottom: 1px solid rgba(0,0,0,0.07);
+    }
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem; letter-spacing: 0.1em;
+      color: var(--black);
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2.4rem; list-style: none; }
+    .nav-links a {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem; letter-spacing: 0.08em;
+      text-transform: uppercase; text-decoration: none;
+      color: var(--muted);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--black); }
+
+    /* PAGE HEADER */
+    .page-header {
+      padding: 10rem 5rem 3rem;
+      background: var(--cream);
+      position: relative;
+      overflow: hidden;
+    }
+    .page-header::before {
+      content: 'CV';
+      position: absolute; right: -1rem; top: 50%;
+      transform: translateY(-50%) rotate(90deg);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 12rem; color: rgba(0,0,0,0.03);
+      user-select: none; white-space: nowrap;
+    }
+    .section-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    .section-heading {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      line-height: 0.92;
+      color: var(--black);
+      margin-bottom: 0;
+    }
+
+    /* RESUME CONTAINER */
+    .resume-container {
+      padding: 5rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    /* RESUME SECTIONS */
+    .resume-section {
+      margin-bottom: 3rem;
+    }
+    .resume-section h3 {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+    }
+
+    /* RESUME ITEM */
+    .resume-item {
+      margin-bottom: 1.5rem;
+    }
+    .resume-item h4 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.1rem;
+      color: var(--black);
+      margin-bottom: 0.3rem;
+    }
+    .resume-item .meta {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+    .resume-item p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .resume-item ul {
+      margin-top: 0.5rem;
+      padding-left: 1.2rem;
+    }
+    .resume-item li {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 0.3rem;
+    }
+
+    /* SKILLS GRID */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+    .skill-category h5 {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--black);
+      margin-bottom: 0.5rem;
+    }
+    .skill-category p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* DOWNLOAD BUTTON */
+    .download-section {
+      text-align: center;
+      padding: 0 5rem 5rem;
+    }
+    .btn {
+      padding: 0.9rem 2.5rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem; letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 1.5px solid var(--black);
+      background: var(--black); color: var(--white);
+      transition: background 0.25s, color 0.25s;
+      display: inline-block;
+    }
+    .btn:hover { background: transparent; color: var(--black); }
+
+    /* FOOTER */
+    footer {
+      background: var(--black);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 1.8rem 5rem;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    footer span {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem; color: rgba(255,255,255,0.25);
+      letter-spacing: 0.08em;
+    }
+
+    /* ANIMATIONS */
+    .reveal {
+      opacity: 0; transform: translateY(40px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* SCROLLBAR */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--black); }
+    ::-webkit-scrollbar-thumb { background: var(--accent); }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      nav { padding: 1rem 2rem; }
+      .nav-links { gap: 1.4rem; }
+      .page-header { padding: 8rem 2.5rem 3rem; }
+      .page-header::before { font-size: 8rem; }
+      .resume-container { padding: 3rem 2.5rem; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .download-section { padding: 0 2.5rem 3rem; }
+      footer { flex-direction: column; gap: 0.5rem; text-align: center; padding: 1.5rem 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Custom Cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">TK</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="skills.html">Skills</a></li>
+    <li><a href="education.html">Education</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="certifications.html">Certs</a></li>
+    <li><a href="resume.html" class="active">Resume</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <p class="section-label">06 — Curriculum Vitae</p>
+  <h2 class="section-heading">RESUME</h2>
+</div>
+
+<!-- RESUME -->
+<div class="resume-container reveal">
+  
+  <!-- CONTACT INFO -->
+  <div class="resume-section">
+    <h3>Contact Information</h3>
+    <div class="resume-item">
+      <h4>Tanisha Khete</h4>
+      <p class="meta">Jaipur, Rajasthan, India</p>
+      <p>📞 +91 8770561722 | ✉️ tanishakhete849@gmail.com</p>
+      <p style="margin-top: 0.5rem;">
+        🔗 <a href="https://www.linkedin.com/in/tanisha-khete-9549b5290" target="_blank" style="color: var(--accent); text-decoration: none;">LinkedIn</a> | 
+        💻 <a href="https://github.com/Tanishakhete" target="_blank" style="color: var(--accent); text-decoration: none;">GitHub</a>
+      </p>
+    </div>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="resume-section">
+    <h3>Professional Summary</h3>
+    <div class="resume-item">
+      <p>Aspiring Software Developer with hands-on experience through academic projects, internships, and personal development. Proficient in building scalable applications using React, Node.js, Python, and SQL. Skilled in writing clean, efficient code and collaborating across teams to deliver high-quality, modern software solutions. Passionate about problem-solving, continuous learning, and contributing to project success.</p>
+    </div>
+  </div>
+
+  <!-- EDUCATION -->
+  <div class="resume-section">
+    <h3>Education</h3>
+    <div class="resume-item">
+      <h4>Bachelor of Technology in Computer Science</h4>
+      <p class="meta">Current | CGPA: 8.6 (till last semester)</p>
+    </div>
+    <div class="resume-item">
+      <h4>Higher Secondary Education (12th)</h4>
+      <p class="meta">PCM (Physics, Chemistry, Mathematics)</p>
+    </div>
+  </div>
+
+  <!-- TECHNICAL SKILLS -->
+  <div class="resume-section">
+    <h3>Technical Skills</h3>
+    <div class="skills-grid">
+      <div class="skill-category">
+        <h5>Languages</h5>
+        <p>Python, R, C</p>
+      </div>
+      <div class="skill-category">
+        <h5>Web Development</h5>
+        <p>HTML, CSS, JavaScript, React</p>
+      </div>
+      <div class="skill-category">
+        <h5>Tools & Soft Skills</h5>
+        <p>Public Speaking, Management, Leadership, Excel</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROJECTS -->
+  <div class="resume-section">
+    <h3>Projects</h3>
+    <div class="resume-item">
+      <h4>Hate Speech Detection</h4>
+      <p>NLP model to classify hate speech in social media text with strong precision and recall metrics.</p>
+    </div>
+    <div class="resume-item">
+      <h4>Learning Management System</h4>
+      <p>Full-featured LMS for course creation, enrollment, quizzes, and progress tracking with user management.</p>
+    </div>
+    <div class="resume-item">
+      <h4>Spam SMS Classifier</h4>
+      <p>Machine learning classifier to detect spam messages using TF-IDF features and statistical analysis.</p>
+    </div>
+    <div class="resume-item">
+      <h4>Digital India Task Management</h4>
+      <p>Web-based task management system for efficient project tracking and team collaboration. Deployed on Netlify.</p>
+      <p style="margin-top: 0.3rem;"><a href="https://hilarious-conkies-9182a0.netlify.app/" target="_blank" style="color: var(--accent); text-decoration: none; font-family: 'Space Mono', monospace; font-size: 0.75rem;">View Live Demo ↗</a></p>
+    </div>
+  </div>
+
+  <!-- CERTIFICATIONS -->
+  <div class="resume-section">
+    <h3>Certifications & Achievements</h3>
+    <div class="resume-item">
+      <ul>
+        <li>Google Cloud Career Launchpad – Data Analytics Track</li>
+        <li>Python – Great Learning</li>
+        <li>Data Science Industrial Program (1stop.ai) – Hate Speech Detection Project</li>
+        <li>Great Learning Academy – Introduction to Artificial Intelligence</li>
+        <li>Udemy – Ethical AI and Its Implications for Modern Business 2.0</li>
+        <li>Udemy – Compose Music with Artificial Intelligence</li>
+        <li>NPTEL – Employment Communication (Lab-based) | Jan–Mar 2025</li>
+        <li>NPTEL – Technical English for Engineers | 62% Score, Aug–Oct 2024</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<!-- DOWNLOAD SECTION -->
+<div class="download-section reveal">
+  <button class="btn" onclick="window.print()">Print / Save as PDF</button>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <span>© 2025 Tanisha Khete — All rights reserved.</span>
+  <span>Jaipur, Rajasthan · India</span>
+</footer>
+
+<script>
+  /* Cursor */
+  const cursor = document.getElementById('cursor');
+  const ring   = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.left = mx - 6 + 'px';
+    cursor.style.top  = my - 6 + 'px';
+  });
+
+  function animateRing() {
+    rx += (mx - rx - 18) * 0.12;
+    ry += (my - ry - 18) * 0.12;
+    ring.style.left = rx + 'px';
+    ring.style.top  = ry + 'px';
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+
+  document.querySelectorAll('a, button, .btn').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.style.transform = 'scale(2.5)';
+      ring.style.width = '60px'; ring.style.height = '60px';
+      ring.style.borderColor = '#c8a96e';
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.style.transform = 'scale(1)';
+      ring.style.width = '36px'; ring.style.height = '36px';
+      ring.style.borderColor = '#0e0e0e';
+    });
+  });
+
+  /* Scroll reveal */
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

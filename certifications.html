@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tanisha Khete — Certifications</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0e0e0e;
+      --white: #f5f2ed;
+      --cream: #ede8e0;
+      --accent: #c8a96e;
+      --accent2: #7b9e87;
+      --red: #c94040;
+      --text: #1a1a1a;
+      --muted: #6b6560;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* Custom cursor */
+    .cursor {
+      width: 12px; height: 12px;
+      background: var(--black);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      transition: transform 0.15s ease, background 0.2s;
+    }
+    .cursor-ring {
+      width: 36px; height: 36px;
+      border: 1.5px solid var(--black);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9998;
+      transition: transform 0.35s cubic-bezier(0.23,1,0.32,1), width 0.3s, height 0.3s, border-color 0.2s;
+    }
+    body:hover .cursor { opacity: 1; }
+
+    /* NOISE OVERLAY */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 100; opacity: 0.5;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.2rem 4rem;
+      background: rgba(245,242,237,0.88);
+      backdrop-filter: blur(12px);
+      z-index: 500;
+      border-bottom: 1px solid rgba(0,0,0,0.07);
+    }
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem; letter-spacing: 0.1em;
+      color: var(--black);
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2.4rem; list-style: none; }
+    .nav-links a {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem; letter-spacing: 0.08em;
+      text-transform: uppercase; text-decoration: none;
+      color: var(--muted);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--black); }
+
+    /* PAGE HEADER */
+    .page-header {
+      padding: 10rem 5rem 3rem;
+      background: var(--black);
+      position: relative;
+      overflow: hidden;
+    }
+    .page-header::before {
+      content: 'CERTS';
+      position: absolute; right: -1rem; top: 50%;
+      transform: translateY(-50%) rotate(90deg);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 10rem; color: rgba(255,255,255,0.03);
+      user-select: none; white-space: nowrap;
+    }
+    .section-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    .section-heading {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      line-height: 0.92;
+      color: var(--white);
+      margin-bottom: 0;
+    }
+
+    /* CERTIFICATIONS */
+    .certifications { padding: 5rem; }
+    .cert-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+    .cert-item {
+      display: flex;
+      gap: 1.2rem;
+      align-items: flex-start;
+      padding: 1.8rem;
+      border: 1.5px solid rgba(0,0,0,0.08);
+      background: var(--white);
+      transition: border-color 0.25s, transform 0.3s;
+    }
+    .cert-item:hover { border-color: var(--accent); transform: translateY(-3px); }
+    .cert-dot {
+      width: 10px; height: 10px;
+      background: var(--accent); border-radius: 50%;
+      flex-shrink: 0; margin-top: 5px;
+    }
+    .cert-title {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 600;
+      font-size: 0.88rem; color: var(--black);
+      margin-bottom: 0.3rem; line-height: 1.4;
+    }
+    .cert-detail {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem; color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* STATS BAR */
+    .stats-bar {
+      padding: 0 5rem 5rem;
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+    }
+    .stat-item {
+      text-align: center;
+    }
+    .stat-item .number {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      color: var(--black);
+    }
+    .stat-item .label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--black);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 1.8rem 5rem;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    footer span {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem; color: rgba(255,255,255,0.25);
+      letter-spacing: 0.08em;
+    }
+
+    /* ANIMATIONS */
+    .reveal {
+      opacity: 0; transform: translateY(40px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* SCROLLBAR */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--black); }
+    ::-webkit-scrollbar-thumb { background: var(--accent); }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      nav { padding: 1rem 2rem; }
+      .nav-links { gap: 1.4rem; }
+      .page-header { padding: 8rem 2.5rem 3rem; }
+      .page-header::before { font-size: 6rem; }
+      .certifications { padding: 3rem 2.5rem; }
+      .cert-grid { grid-template-columns: 1fr; }
+      .stats-bar { flex-direction: column; gap: 1.5rem; padding: 0 2.5rem 3rem; }
+      footer { flex-direction: column; gap: 0.5rem; text-align: center; padding: 1.5rem 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Custom Cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">TK</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="skills.html">Skills</a></li>
+    <li><a href="education.html">Education</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="certifications.html" class="active">Certs</a></li>
+    <li><a href="resume.html">Resume</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <p class="section-label">05 — Recognition</p>
+  <h2 class="section-heading">CERTIFICATIONS<br>& ACHIEVEMENTS</h2>
+</div>
+
+<!-- CERTIFICATIONS -->
+<section class="certifications reveal">
+  <div class="cert-grid">
+    <div class="cert-item">
+      <div class="cert-dot"></div>
+      <div>
+        <p class="cert-title">Google Cloud Career Launchpad – Data Analytics Track</p>
+        <p class="cert-detail">Successfully completed all courses and labs in the Data Analytics track.</p>
+      </div>
+    </div>
+    <div class="cert-item">
+      <div class="cert-dot"></div>
+      <div>
+        <p class="cert-title">Python – Great Learning</p>
+        <p class="cert-detail">Completed the course on Python and received a certificate of completion.</p>
+      </div>
+    </div>
+    <div class="cert-item">
+      <div class="cert-dot"></div>
+      <div>
+        <p class="cert-title">Project Completion – Learning Management System</p>
+        <p class="cert-detail">Completed the project on Learning Management System and received a certificate of completion.</p>
+      </div>
+    </div>
+    <div class="cert-item">
+      <div class="cert-dot"></div>
+      <div>
+        <p class="cert-title">Data Science Industrial Program (1stop.ai)</p>
+        <p class="cert-detail">Completed projects including Hate Speech Detection (Jan–Feb 2024).</p>
+      </div>
+    </div>
+    <div class="cert-item">
+      <div class="cert-dot"></div>
+      <div>
+        <p class="cert-title">Data Science Program Participation (1stop.ai)</p>
+        <p class="cert-detail">Successfully participated in Data Science program (Jan–Feb 2024).</p>
+      </div>
+    </div>
+    <div class="cert-item">
+      <div class="cert-dot"></div>
+      <div>
+        <p class="cert-title">NPTEL – Employment Communication (Lab-based)</p>
+        <p class="cert-detail">Completed 8-week course, Jan–Mar 2025.</p>
+      </div>
+    </div>
+    <div class="cert-item">
+      <div class="cert-dot"></div>
+      <div>
+        <p class="cert-title">Great Learning Academy – Introduction to Artificial Intelligence</p>
+        <p class="cert-detail">Completed May 2024.</p>
+      </div>
+    </div>
+    <div class="cert-item">
+      <div class="cert-dot"></div>
+      <div>
+        <p class="cert-title">Udemy – Ethical AI and Its Implications for Modern Business 2.0</p>
+        <p class="cert-detail">Completed Aug 2024.</p>
+      </div>
+    </div>
+    <div class="cert-item">
+      <div class="cert-dot"></div>
+      <div>
+        <p class="cert-title">Udemy – Compose Music with Artificial Intelligence</p>
+        <p class="cert-detail">Completed Aug 2024.</p>
+      </div>
+    </div>
+    <div class="cert-item">
+      <div class="cert-dot"></div>
+      <div>
+        <p class="cert-title">NPTEL – Technical English for Engineers</p>
+        <p class="cert-detail">Completed 12-week course with 62% score (Aug–Oct 2024).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar reveal">
+  <div class="stat-item">
+    <div class="number">10+</div>
+    <div class="label">Certifications</div>
+  </div>
+  <div class="stat-item">
+    <div class="number">Google</div>
+    <div class="label">Cloud Platform</div>
+  </div>
+  <div class="stat-item">
+    <div class="number">NPTEL</div>
+    <div class="label">IIT Courses</div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <span>© 2025 Tanisha Khete — All rights reserved.</span>
+  <span>Jaipur, Rajasthan · India</span>
+</footer>
+
+<script>
+  /* Cursor */
+  const cursor = document.getElementById('cursor');
+  const ring   = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.left = mx - 6 + 'px';
+    cursor.style.top  = my - 6 + 'px';
+  });
+
+  function animateRing() {
+    rx += (mx - rx - 18) * 0.12;
+    ry += (my - ry - 18) * 0.12;
+    ring.style.left = rx + 'px';
+    ring.style.top  = ry + 'px';
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+
+  document.querySelectorAll('a, button, .cert-item').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.style.transform = 'scale(2.5)';
+      ring.style.width = '60px'; ring.style.height = '60px';
+      ring.style.borderColor = '#c8a96e';
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.style.transform = 'scale(1)';
+      ring.style.width = '36px'; ring.style.height = '36px';
+      ring.style.borderColor = '#0e0e0e';
+    });
+  });
+
+  /* Scroll reveal */
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  /* Staggered cert items */
+  document.querySelectorAll('.cert-item').forEach((el, i) => {
+    el.style.transitionDelay = i * 0.05 + 's';
+  });
+</script>
+</body>
+</html>
